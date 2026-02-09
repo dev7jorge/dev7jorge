@@ -4,9 +4,3 @@
 
 ###### Estou sempre explorando, praticando e buscando melhorar minhas habilidades. Sinta-se à vontade para conferir meus projetos e acompanhar meu progresso!
 
-<a href="https://github.com/anuraghazra/convoychat">
-  <img height=200 align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=dev7jorge&layout=compact&langs_count=8&card_width=320" />
-</a>
-<a href="https://github.com/anuraghazra/github-readme-stats">
-  <img height=200 align="center" src="https://github-readme-stats.vercel.app/api?username=dev7jorge" />
-</a>
