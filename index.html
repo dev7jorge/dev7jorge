@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de CPF Fictício</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .container {
+      background: rgba(2, 6, 23, 0.85);
+      border: 1px solid #1e293b;
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(56,189,248,.15);
+      animation: fadeIn .8s ease;
+    }
+
+    h1 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      opacity: .8;
+      margin-bottom: 25px;
+    }
+
+    .cpf-box {
+      background: #020617;
+      border: 1px solid #1e293b;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(56,189,248,.5);
+    }
+
+    .copy {
+      background: transparent;
+      border: 1px solid #38bdf8;
+      margin-top: 10px;
+      color: #38bdf8;
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: .8rem;
+      opacity: .6;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Gerador de CPF</h1>
+    <p>Gere CPFs fictícios válidos para testes em seus projetos</p>
+
+    <div class="cpf-box" id="cpf">000.000.000-00</div>
+
+    <button onclick="gerarCPF()">Gerar Novo CPF</button>
+    <button class="copy" onclick="copiarCPF()">Copiar CPF</button>
+
+    <footer>
+      Uso exclusivo para testes e desenvolvimento
+    </footer>
+  </div>
+
+  <script>
+    function gerarCPF() {
+      let cpf = [];
+      
+      for (let i = 0; i < 9; i++) {
+        cpf.push(Math.floor(Math.random() * 9));
+      }
+
+      cpf.push(calcularDigito(cpf, 10));
+      cpf.push(calcularDigito(cpf, 11));
+
+      let formatado = cpf.join('');
+      formatado = formatado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+
+      document.getElementById("cpf").innerText = formatado;
+    }
+
+    function calcularDigito(cpf, peso) {
+      let soma = 0;
+
+      for (let i = 0; i < cpf.length; i++) {
+        soma += cpf[i] * (peso - i);
+      }
+
+      let resto = soma % 11;
+      return resto < 2 ? 0 : 11 - resto;
+    }
+
+    function copiarCPF() {
+      const cpf = document.getElementById("cpf").innerText;
+      navigator.clipboard.writeText(cpf);
+      alert("CPF copiado: " + cpf);
+    }
+
+    gerarCPF();
+  </script>
+
+</body>
+</html>
